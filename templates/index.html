@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lập lịch học</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h2>Lập lịch học bằng thuật toán quay lui</h2>
+    <div class = "constrain">
+    <h3>Các ràng buộc tối thiểu</h3>
+    <ul>
+        <li>Số buổi học cố định là 12 (6 ngày x 2 buổi/ngày)</li>
+        <li>Số phòng học tối thiểu: 13 lớp cần ít nhất 2 phòng.</li>
+        <li>Số giáo viên tối thiểu: 13 lớp và 3 môn cần ít nhất 3 giáo viên.</li>
+        <li>Số lớp học không nên vượt quá (số phòng học x 12) để đảm bảo khả thi.</li>
+    </ul>
+    </div>
+    <br>
+     <form method="post" id="scheduleForm">
+        <div class="inline-inputs">
+            <div class="input-group">
+                <label>Số lớp:</label>
+                <input type="number" name="num_classes" min="1" required>
+            </div>
+            
+            <div class="input-group">
+                <label>Số giáo viên:</label>
+                <input type="number" name="num_teachers" min="1" required>
+            </div>
+            
+            <div class="input-group">
+                <label>Số phòng học:</label>
+                <input type="number" name="num_rooms" min="1" required>
+            </div>
+        </div>
+        
+        <label>Danh sách môn học (cách nhau bởi dấu phẩy):</label>
+        <input type="text" name="subjects" required>
+        
+        <button type="submit">Xếp lịch</button>
+    </form>
+    {% if result %}
+        {% if result.error %}
+            <p style="color: red;">{{ result.error }}</p>
+        {% else %}
+            <h3>Kết quả xếp lịch:</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Lớp</th>
+                        <th>Môn học</th>
+                        <th>Giáo viên</th>
+                        <th>Thời gian</th>
+                        <th>Phòng học</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in result.schedule %}
+                        <tr>
+                            <td>{{ row.class }}</td>
+                            <td>{{ row.subject }}</td>
+                            <td>{{ row.teacher }}</td>
+                            <td>{{ row.time }}</td>
+                            <td>{{ row.room }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    {% endif %}
+</body>
+</html>

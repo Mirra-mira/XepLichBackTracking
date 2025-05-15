@@ -18,28 +18,29 @@
     </div>
     <br>
      <form method="post" id="scheduleForm">
-        <div class="inline-inputs">
-            <div class="input-group">
-                <label>Số lớp:</label>
-                <input type="number" name="num_classes" min="1" required>
-            </div>
-            
-            <div class="input-group">
-                <label>Số giáo viên:</label>
-                <input type="number" name="num_teachers" min="1" required>
-            </div>
-            
-            <div class="input-group">
-                <label>Số phòng học:</label>
-                <input type="number" name="num_rooms" min="1" required>
-            </div>
+    <div class="inline-inputs">
+        <div class="input-group">
+            <label>Số lớp:</label>
+            <input type="number" name="num_classes" min="1" required value="{{ request.form.num_classes }}">
         </div>
         
-        <label>Danh sách môn học (cách nhau bởi dấu phẩy):</label>
-        <input type="text" name="subjects" required>
+        <div class="input-group">
+            <label>Số giáo viên:</label>
+            <input type="number" name="num_teachers" min="1" required value="{{ request.form.num_teachers }}">
+        </div>
         
-        <button type="submit">Xếp lịch</button>
-    </form>
+        <div class="input-group">
+            <label>Số phòng học:</label>
+            <input type="number" name="num_rooms" min="1" required value="{{ request.form.num_rooms }}">
+        </div>
+    </div>
+    
+    <label>Danh sách môn học (cách nhau bởi dấu phẩy):</label>
+    <input type="text" name="subjects" required value="{{ request.form.subjects }}">
+
+    <button type="submit">Xếp lịch</button>
+</form>
+
     {% if result %}
         {% if result.error %}
             <p style="color: red;">{{ result.error }}</p>

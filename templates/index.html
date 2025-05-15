@@ -40,7 +40,7 @@
 
 <div class="button-group">
     <button type="submit" class="btn-primary">Xếp lịch</button>
-    <button type="reset" class="btn-secondary">Xếp lịch lại</button>
+    <button type="reset" class="btn-secondary" onclick="resetForm()">Xếp lịch lại</button>
 </div>
 
 
@@ -76,4 +76,14 @@
         {% endif %}
     {% endif %}
 </body>
+<script>
+function resetForm() {
+    const form = document.getElementById("scheduleForm");
+    for (const el of form.elements) {
+        if (el.tagName === "INPUT") {
+            el.value = '';
+        }
+    }
+}
+</script>
 </html>

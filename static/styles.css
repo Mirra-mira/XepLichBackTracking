@@ -101,9 +101,39 @@ button {
     width: 100%;
 }
 
-button:hover {
+.btn-primary:hover {
     background-color: #2980b9;
 }
+
+.btn-secondary:hover {
+    background-color:rgb(76, 73, 73);
+}
+
+.button-group {
+    display: flex;              /* Hiển thị trên cùng dòng */
+    gap: 10px;                  /* Khoảng cách giữa 2 nút */
+    justify-content: center;   /* Căn giữa toàn bộ nhóm nút */
+    margin-top: 20px;
+}
+
+.button-group button {
+    padding: 12px 24px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #2196F3;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: grey;
+    color: white;
+}
+
 
 table {
     width: 100%;
@@ -182,4 +212,5 @@ p[style="color: red;"] {
     padding: 10px;
     }
 }
+
 

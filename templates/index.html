@@ -38,7 +38,12 @@
     <label>Danh sách môn học (cách nhau bởi dấu phẩy):</label>
     <input type="text" name="subjects" required value="{{ request.form.subjects }}">
 
-    <button type="submit">Xếp lịch</button>
+<div class="button-group">
+    <button type="submit" class="btn-primary">Xếp lịch</button>
+    <button type="reset" class="btn-secondary">Xếp lịch lại</button>
+</div>
+
+
 </form>
 
     {% if result %}

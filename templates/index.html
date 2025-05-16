@@ -10,10 +10,11 @@
     <div class = "constrain">
     <h3>Các ràng buộc tối thiểu</h3>
     <ul>
-        <li>Số buổi học cố định là 12 (6 ngày x 2 buổi/ngày)</li>
-        <li>Số phòng học tối thiểu: 13 lớp cần ít nhất 2 phòng.</li>
-        <li>Số giáo viên tối thiểu: 13 lớp và 3 môn cần ít nhất 3 giáo viên.</li>
-        <li>Số lớp học không nên vượt quá (số phòng học x 12) để đảm bảo khả thi.</li>
+        <li>Có tổng cộng 24 khung giờ học trong tuần.</li>
+        <li>Số phòng học tối thiểu: 2 lớp, 3 môn cần tối thiểu 1 phòng.</li>
+        <li>Số giáo viên tối thiểu: 2 lớp, 3 môn cần ít nhất 3 giáo viên.</li>
+        <li>Tổng số phiên học không được vượt quá số phòng học × 24 để lịch khả thi.</li>
+        <li>Mỗi môn phải có ít nhất 1 giáo viên dạy.</li>
     </ul>
     </div>
     <br>
@@ -40,12 +41,12 @@
 
 <div class="button-group">
     <button type="submit" class="btn-primary">Xếp lịch</button>
-    <button type="reset" class="btn-secondary" onclick="resetForm()">Xếp lịch lại</button>
+    <button type="button" class="btn-secondary" onclick="resetForm()">Xếp lịch lại</button>
 </div>
 
 
 </form>
-
+<div id="resultContainer">
     {% if result %}
         {% if result.error %}
             <p style="color: red;">{{ result.error }}</p>
@@ -75,6 +76,7 @@
             </table>
         {% endif %}
     {% endif %}
+</div>
 </body>
 <script>
 function resetForm() {
@@ -84,6 +86,14 @@ function resetForm() {
             el.value = '';
         }
     }
+    const resultContainer = document.getElementById("resultContainer");
+    if (resultContainer) {
+        resultContainer.innerHTML = '';
+    }
+    document.querySelector('input[name="num_classes"]').value = '';
+    document.querySelector('input[name="num_teachers"]').value = '';
+    document.querySelector('input[name="num_rooms"]').value = '';
+    document.querySelector('input[name="subjects"]').value = '';
 }
 </script>
 </html>

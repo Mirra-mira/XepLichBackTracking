@@ -47,6 +47,15 @@
 
 </form>
 <div id="resultContainer">
+    {% if result.schedule %}
+    <label for="classFilter">Lọc theo lớp:</label>
+    <select id="classFilter" onchange="filterByClass()">
+        <option value="all">Tất cả</option>
+        {% for row in result.schedule|map(attribute='class')|unique %}
+            <option value="{{ row }}">{{ row }}</option>
+        {% endfor %}
+    </select>
+    {% endif %}
     {% if result %}
         {% if result.error %}
             <p style="color: red;">{{ result.error }}</p>
@@ -62,9 +71,9 @@
                         <th>Phòng học</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody >
                     {% for row in result.schedule %}
-                        <tr>
+                        <tr class="schedule-row" data-class="{{ row.class }}">
                             <td>{{ row.class }}</td>
                             <td>{{ row.subject }}</td>
                             <td>{{ row.teacher }}</td>
@@ -79,21 +88,35 @@
 </div>
 </body>
 <script>
-function resetForm() {
-    const form = document.getElementById("scheduleForm");
-    for (const el of form.elements) {
-        if (el.tagName === "INPUT") {
-            el.value = '';
+    function resetForm() 
+    {
+        const form = document.getElementById("scheduleForm");
+        for (const el of form.elements) {
+            if (el.tagName === "INPUT") {
+                el.value = '';
+            }
         }
+        const resultContainer = document.getElementById("resultContainer");
+        if (resultContainer) {
+            resultContainer.innerHTML = '';
+        }
+        document.querySelector('input[name="num_classes"]').value = '';
+        document.querySelector('input[name="num_teachers"]').value = '';
+        document.querySelector('input[name="num_rooms"]').value = '';
+        document.querySelector('input[name="subjects"]').value = '';
     }
-    const resultContainer = document.getElementById("resultContainer");
-    if (resultContainer) {
-        resultContainer.innerHTML = '';
+    function filterByClass() 
+    {
+        const selectedClass = document.getElementById('classFilter').value;
+        const rows = document.querySelectorAll('.schedule-row');
+        
+        rows.forEach(row => {
+            if (selectedClass === 'all' || row.getAttribute('data-class') === selectedClass) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
     }
-    document.querySelector('input[name="num_classes"]').value = '';
-    document.querySelector('input[name="num_teachers"]').value = '';
-    document.querySelector('input[name="num_rooms"]').value = '';
-    document.querySelector('input[name="subjects"]').value = '';
-}
 </script>
 </html>
